@@ -1,2 +1,2 @@
 # holbertonschool-chatgpt-introduction
-Introduction chatgpt 
+Readme introduction chatgpt 
