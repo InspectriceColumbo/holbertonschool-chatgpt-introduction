@@ -2,8 +2,10 @@
 import random
 import os
 
+
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
+
 
 class Minesweeper:
     def __init__(self, width=10, height=10, mines=10):
@@ -51,7 +53,7 @@ class Minesweeper:
                         self.reveal(nx, ny)
         return True
 
-    def check_win(self): # Added a win-check method
+    def check_win(self):  # Added a win-check method
         for y in range(self.height):
             for x in range(self.width):
                 if (y * self.width + x) not in self.mines and not self.revealed[y][x]:
@@ -65,18 +67,19 @@ class Minesweeper:
                 x = int(input("Enter x coordinate: "))
                 y = int(input("Enter y coordinate: "))
                 if not (0 <= x < self.width and 0 <= y < self.height):
-                    print("Coordinates out of bounds.") # bounds check 4 x & y
+                    print("Coordinates out of bounds.")  # bounds check 4 x&y
                     continue
                 if not self.reveal(x, y):
                     self.print_board(reveal=True)
                     print("Game Over! You hit a mine.")
                     break
-                if self.check_win(): # Checks for a win after each move
+                if self.check_win():  # Checks for a win after each move
                     self.print_board(reveal=True)
-                    print("Congratulations! You cleared the board!")
+                    print("Congratulations! You've won the game.")
                     break
             except ValueError:
                 print("Invalid input. Please enter numbers only.")
+
 
 if __name__ == "__main__":
     game = Minesweeper()
