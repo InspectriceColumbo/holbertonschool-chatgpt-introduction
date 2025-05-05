@@ -42,6 +42,8 @@ class Minesweeper:
         return count
 
     def reveal(self, x, y):
+        if self.revealed[y][x]:
+            return True  # Already revealed
         if (y * self.width + x) in self.mines:
             return False
         self.revealed[y][x] = True
@@ -69,10 +71,16 @@ class Minesweeper:
                 if not (0 <= x < self.width and 0 <= y < self.height):
                     print("Coordinates out of bounds.")  # bounds check 4 x&y
                     continue
+
+                if self.revealed[y][x]:  #Prev player from takin revealed cell
+                    print("Cell already revealed. Choose a different one.")
+                    continue
+
                 if not self.reveal(x, y):
                     self.print_board(reveal=True)
                     print("Game Over! You hit a mine.")
                     break
+
                 if self.check_win():  # Checks for a win after each move
                     self.print_board(reveal=True)
                     print("Congratulations! You've won the game.")
